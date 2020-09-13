@@ -195,7 +195,7 @@ class DemoNavbar extends React.Component {
                       tag={Link}
                       // target="_blank"
                     >
-                      <span className="btn-inner--icon">
+                      <span className="fa fa-code">
                         <i className="fa fa-get-pocket mr-2" />
                       </span>
                       <span className="nav-link-inner--text ml-1">

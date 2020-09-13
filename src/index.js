@@ -15,7 +15,8 @@ import UserLayout from "layouts/User.js";
 
 // -------------------import Home pages---------------------//
 import Landing from "views/examples/Homepage/Landing.js";
-
+import Login from "views/examples/Homepage/Login.js";
+import Register from "views/examples/Homepage/Register.js";
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
@@ -30,6 +31,16 @@ ReactDOM.render(
         path="/landing-page"
         exact
         render={(props) => <Landing {...props} />}
+      />
+      <Route
+        path="/login-page"
+        exact
+        render={(props) => <Login {...props} />}
+      />
+      <Route
+        path="/register-page"
+        exact
+        render={(props) => <Register {...props} />}
       />
       <Redirect from="*" to="/" />
     </Switch>

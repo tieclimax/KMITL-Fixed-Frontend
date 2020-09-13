@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 // reactstrap components
 import {
   Button,
-  Card,
-  CardImg,
   NavItem,
   NavLink,
   Nav,
@@ -27,7 +25,7 @@ class CardsFooter extends React.Component {
                   ขอบคุณที่ช่วยแจ้งซ่อมกับเรา
                 </h3>
                 <h4 className="mb-0 font-weight-light">
-                  ช่วยกันดูแลสถาบันเพื่อความยั่งยืน ใช้บริการเรา EZrepair
+                  ช่วยกันดูแลสถาบันเพื่อความยั่งยืน ใช้บริการเรา KMITL-Fixed
                 </h4>
               </Col>
               <Col className="text-lg-center btn-wrapper" lg="6">
@@ -39,7 +37,7 @@ class CardsFooter extends React.Component {
                   target="_blank"
                 >
                   <span className="btn-inner--icon">
-                    <i className="fa fa-bandcamp" />
+                    <i class=" fa fa-check-square"></i>
                   </span>
                 </Button>
                 <UncontrolledTooltip delay={0} target="tooltip475038074">
@@ -53,7 +51,8 @@ class CardsFooter extends React.Component {
                   target="_blank"
                 >
                   <span className="btn-inner--icon">
-                    <i className="fa fa-facebook-square" />
+                    {/* <i className="fa fa-facebook-square" /> */}
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                   </span>
                 </Button>
                 <UncontrolledTooltip delay={0} target="tooltip837440414">
@@ -73,7 +72,7 @@ class CardsFooter extends React.Component {
                 <Nav className="nav-footer justify-content-end">
                   <NavItem>
                     <NavLink href="" target="_blank">
-                      EZrepair
+                      KMITL-Fixed
                     </NavLink>
                   </NavItem>
                   <NavItem>

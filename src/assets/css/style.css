@@ -1,0 +1,38 @@
+.header-top {
+  background-image: linear-gradient(to right, #f15642, #ff7315);
+}
+
+@font-face {
+  src: url(../fonts/Mitr/Mitr-Light.ttf);
+  font-family: myfontsthai;
+}
+
+.headroom--not-top {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #fd7920 !important;
+  box-shadow: 0 1px 10px rgba(130, 130, 134, 0.1);
+}
+
+body {
+  font-family: myfontsthai;
+}
+
+.section-shaped {
+  /* สีของหน้าแรก */
+  /* new version */
+  background-image: linear-gradient(to right, #fd7920, #fda469);
+
+  /* old version */
+  /* background-image: linear-gradient(to right, #f15642, #ff8534); */
+  /* background-color: #ff7315; */
+}
+
+.floating {
+  animation: floating 3s ease infinite;
+  will-change: transform;
+}
+.floating:hover {
+  animation-play-state: paused;
+  /* animation-play-state: running; */
+}

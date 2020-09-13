@@ -6,7 +6,7 @@ import {
   GoogleMap,
   Marker,
 } from "react-google-maps";
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // reactstrap components
 import {
   Card,
@@ -99,11 +99,14 @@ class Contacts extends React.Component {
                       <h2>รายชื่อ เจ้าหน้าที่</h2>
                     </Col>
                     <Col className="text-right">
-                      {/* <Link to="/Manager/AddStaff"> */}
-                      <Button color="success" style={{ color: "black" }}>
-                        <i className="fa fa-user-plus " aria-hidden="true"></i>
-                      </Button>
-                      {/* </Link> */}
+                      <Link to="/Manager/AddStaff">
+                        <Button color="success" style={{ color: "black" }}>
+                          <i
+                            className="fa fa-user-plus "
+                            aria-hidden="true"
+                          ></i>
+                        </Button>
+                      </Link>
                     </Col>
                   </Row>
                 </CardHeader>
@@ -112,9 +115,7 @@ class Contacts extends React.Component {
                   <Table responsive>
                     <thead className="thead-light">
                       <tr>
-                        <th className="text-center">
-                         No.
-                        </th>
+                        <th className="text-center">No.</th>
                         <th>ชื่อ-สกุล</th>
                         <th>อีเมล</th>
                         <th>เบอร์โทร</th>

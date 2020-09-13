@@ -6,7 +6,7 @@ import {
   GoogleMap,
   Marker,
 } from "react-google-maps";
-
+import {  Link } from "react-router-dom";
 // reactstrap components
 import {
   Card,
@@ -17,69 +17,70 @@ import {
   CardBody,
   FormGroup,
   Form,
+  Button,
+  Table,
+  Modal,
+  Input,
 } from "reactstrap";
 
 // core components
 import Header from "components/Headers/Header.js";
 
-// mapTypeId={google.maps.MapTypeId.ROADMAP}
-const MapWrapper = withScriptjs(
-  withGoogleMap((props) => (
-    <GoogleMap
-      defaultZoom={15}
-      defaultCenter={{ lat: 13.726717, lng: 100.783186 }}
-      defaultOptions={{
-        scrollwheel: false,
-        styles: [
-          {
-            featureType: "administrative",
-            elementType: "labels.text.fill",
-            stylers: [{ color: "#444444" }],
-          },
-          {
-            featureType: "landscape",
-            elementType: "all",
-            stylers: [{ color: "#f2f2f2" }],
-          },
-          {
-            featureType: "poi",
-            elementType: "all",
-            stylers: [{ visibility: "off" }],
-          },
-          {
-            featureType: "road",
-            elementType: "all",
-            stylers: [{ saturation: -100 }, { lightness: 45 }],
-          },
-          {
-            featureType: "road.highway",
-            elementType: "all",
-            stylers: [{ visibility: "simplified" }],
-          },
-          {
-            featureType: "road.arterial",
-            elementType: "labels.icon",
-            stylers: [{ visibility: "off" }],
-          },
-          {
-            featureType: "transit",
-            elementType: "all",
-            stylers: [{ visibility: "off" }],
-          },
-          {
-            featureType: "water",
-            elementType: "all",
-            stylers: [{ color: "#5e72e4" }, { visibility: "on" }],
-          },
-        ],
-      }}
-    >
-      <Marker position={{ lat: 13.726717, lng: 100.783186 }} />
-    </GoogleMap>
-  ))
-);
+const dataList = [
+  {
+    No: "1",
+    Name: "Mart ",
+    Lastname: "Jacob",
+    Email: "Jibiza@hotmail.com",
+    Tel: "092-258-7958",
+  },
+  {
+    No: "2",
+    Name: "Jason ",
+    Lastname: "hornton",
+    Email: "Jibiza@hotmail.com",
+    Tel: "092-258-7958",
+  },
+  {
+    No: "3",
+    Name: "Mart ",
+    Lastname: "Jacob",
+    Email: "Jibiza@hotmail.com",
+    Tel: "092-258-7958",
+  },
+  {
+    No: "4",
+    Name: "Mart ",
+    Lastname: "Jacob",
+    Email: "Jibiza@hotmail.com",
+    Tel: "092-258-7958",
+  },
+  {
+    No: "5",
+    Name: "Jason ",
+    Lastname: "hornton",
+    Email: "Jibiza@hotmail.com",
+    Tel: "092-258-7958",
+  },
+  {
+    No: "6",
+    Name: "Mart ",
+    Lastname: "Jacob",
+    Email: "Jibiza@hotmail.com",
+    Tel: "092-258-7958",
+  },
+];
 
 class Contacts extends React.Component {
+  state = {
+    exampleModal: false,
+  };
+  toggleModal = (state) => {
+    this.setState({
+      [state]: !this.state[state],
+    });
+  };
+
   render() {
     return (
       <>
@@ -92,31 +93,68 @@ class Contacts extends React.Component {
                 <Row className="justify-content-center">
                   <Col className="order-lg-2" lg="3"></Col>
                 </Row>
-                <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                  <div className="d-flex justify-content-center">
-                    <h2>Contacts-page</h2>
-                  </div>
+                <CardHeader className=" border-0  pt-md-4 pb-0 pb-md-4">
+                  <Row className="d-flex">
+                    <Col>
+                      <h2>รายชื่อ เจ้าหน้าที่</h2>
+                    </Col>
+                    <Col className="text-right">
+                      {/* <Link to="/Manager/AddStaff"> */}
+                      <Button color="success" style={{ color: "black" }}>
+                        <i className="fa fa-user-plus " aria-hidden="true"></i>
+                      </Button>
+                      {/* </Link> */}
+                    </Col>
+                  </Row>
                 </CardHeader>
                 {/* เอาโค้ดมาวางต่อข้างล่างนี้ */}
                 <CardBody className="pt-0 pt-md-4">
-                  <Row>
-                    <div className="col">
-                      <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                        <div>
-                          <span className="heading">22</span>
-                          <span className="description">Friends</span>
-                        </div>
-                        <div>
-                          <span className="heading">10</span>
-                          <span className="description">Photos</span>
-                        </div>
-                        <div>
-                          <span className="heading">89</span>
-                          <span className="description">Comments</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Row>
+                  <Table responsive>
+                    <thead className="thead-light">
+                      <tr>
+                        <th className="text-center">
+                         No.
+                        </th>
+                        <th>ชื่อ-สกุล</th>
+                        <th>อีเมล</th>
+                        <th>เบอร์โทร</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="">
+                      {dataList.map((dataList) => (
+                        <tr>
+                          <th className="text-center">{dataList.No}</th>
+
+                          <td>
+                            {dataList.Name} {dataList.Lastname}
+                          </td>
+                          <td>{dataList.Email}</td>
+                          <td>{dataList.Tel}</td>
+                          <td>
+                            <div className="d-flex align-items-center">
+                              <Row>
+                                <Col>
+                                  <i
+                                    className="fa fa-edit"
+                                    aria-hidden="true"
+                                    style={{ color: "blue" }}
+                                  />
+                                </Col>
+                                <Col>
+                                  <i
+                                    className="fa fa-trash"
+                                    aria-hidden="true"
+                                    style={{ color: "red" }}
+                                  ></i>
+                                </Col>
+                              </Row>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
                 </CardBody>
               </Card>
             </Col>

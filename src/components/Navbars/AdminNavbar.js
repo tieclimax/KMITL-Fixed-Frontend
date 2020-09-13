@@ -83,10 +83,7 @@ class AdminNavbar extends React.Component {
                     <i className="ni ni-calendar-grid-58" />
                     <span>Components</span>
                   </DropdownItem>
-                  <DropdownItem to="/admin/Authentication" tag={Link}>
-                    <i className="ni ni-calendar-grid-58" />
-                    <span>Authenticatio</span>
-                  </DropdownItem>
+              
                   <DropdownItem to="/admin/Contacts" tag={Link}>
                     <i className="ni ni-calendar-grid-58" />
                     <span>Contacts</span>

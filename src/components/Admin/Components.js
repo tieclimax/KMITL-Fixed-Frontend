@@ -25,7 +25,7 @@ import {
 
 // core components
 import Header from "components/Headers/Header.js";
-import Authentication from "components/Admin/Authentication";
+
 
 // mapTypeId={google.maps.MapTypeId.ROADMAP}
 const MapWrapper = withScriptjs(

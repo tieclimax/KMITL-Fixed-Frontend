@@ -83,10 +83,7 @@ class ManagerNavbar extends React.Component {
                     <i className="ni ni-calendar-grid-58" />
                     <span>Report</span>
                   </DropdownItem>
-                  <DropdownItem to="/manager/Tables" tag={Link}>
-                    <i className="ni ni-calendar-grid-58" />
-                    <span>Table</span>
-                  </DropdownItem>
+               
                   <DropdownItem to="/manager/History" tag={Link}>
                     <i className="ni ni-calendar-grid-58" />
                     <span>History</span>

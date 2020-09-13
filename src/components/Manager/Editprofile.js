@@ -22,7 +22,7 @@ import {
 // core components
 import Header from "components/Headers/Header.js";
 import Upwork from "components/Manager/Upwork";
-import App from "components/Manager/App";
+
 import UserHeader from "components/Headers/UserHeader.js";
 
 class Editprofile extends React.Component {
@@ -43,7 +43,7 @@ class Editprofile extends React.Component {
                     {/** */}
                     <Row className="justify-content-center">
                       <Col className="order-lg-2" lg="3">
-                        <App />
+               
                       </Col>
                     </Row>
                     <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">

@@ -1,39 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// react plugin used to create google maps
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-} from "react-google-maps";
-
+import { Redirect } from "react-router";
 // reactstrap components
 import {
   Button,
   Card,
   CardHeader,
   CardBody,
-  CardImg,
   FormGroup,
   Form,
   Input,
-  InputGroup,
   Container,
-  Label,
   Row,
   Col,
 } from "reactstrap";
-
 // core components
-import Header from "components/Headers/Header.js";
-import Upwork from "components/Manager/Upwork";
-
 import UserHeader from "components/Headers/UserHeader.js";
 
-
-
-class Editprofile extends React.Component {
+class Profile extends React.Component {
+  state = {
+    redirect: false,
+  };
+  redirectHandler = () => {
+    this.setState({ redirect: true });
+    this.renderRedirect();
+  };
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to="./Editprofile.js" />;
+    }
+  };
   render() {
     return (
       <>
@@ -51,7 +47,15 @@ class Editprofile extends React.Component {
                     {/** */}
                     <Row className="justify-content-center">
                       <Col className="order-lg-2" lg="3">
-                  
+                        <div className="card-profile-image">
+                          <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                            <img
+                              alt="..."
+                              className="rounded-circle"
+                              src={require("assets/img/theme/team-4-800x800.jpg")}
+                            />
+                          </a>
+                        </div>
                       </Col>
                     </Row>
                     <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
@@ -74,12 +78,13 @@ class Editprofile extends React.Component {
                       </Col>
                       <Col className="text-right" xs="4">
                         <Button
+                          onClick={this.redirectHandler}
+                          to="/admin/Editprofile"
+                          tag={Link}
                           color="primary"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
                           size="sm"
                         >
-                          Settings
+                          <i className="ni ni-settings-gear-65">Settings</i>
                         </Button>
                       </Col>
                     </Row>
@@ -174,26 +179,6 @@ class Editprofile extends React.Component {
                             </FormGroup>
                           </Col>
                         </Row>
-                        <div className="text-center">
-                          <Button
-                            to="/admin/Profile"
-                            tag={Link}
-                            className="mt-4"
-                            color="success"
-                            type="button"
-                          >
-                            บันทึก
-                          </Button>
-
-                          <Button
-                            className="mt-4"
-                            /*ความสูง*/ color="danger"
-                            type="button"
-                            alert
-                          >
-                            ยกเลิก
-                          </Button>
-                        </div>
                       </div>
                     </Form>
                   </CardBody>
@@ -207,4 +192,4 @@ class Editprofile extends React.Component {
   }
 }
 
-export default Editprofile;
+export default Profile;

@@ -6,9 +6,10 @@ import { Container } from "reactstrap";
 import AdminNavbar from "components/Navbars/ManagerNavbar";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-
 import routes from "routes/manager.routes.js";
-
+import Changepassword from "components/Manager/Changepassword"
+import Editprofile from "components/Manager/Editprofile";
+import AddStaff from "components/Manager/AddStaff"
 class Manager extends React.Component {
   componentDidUpdate(e) {
     document.documentElement.scrollTop = 0;
@@ -60,6 +61,9 @@ class Manager extends React.Component {
             brandText={this.getBrandText(this.props.location.pathname)}
           />
           <Switch>
+            <Route path="/manager/Changepassword" component={Changepassword}  />
+            <Route path="/manager/Editprofile" component={Editprofile}  />
+            <Route path="/manager/addstaff" component={AddStaff}  />
             {this.getRoutes(routes)}
             <Redirect from="*" to="/Manager/index" />
           </Switch>

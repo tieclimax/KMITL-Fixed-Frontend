@@ -11,6 +11,7 @@ import AdminLayout from "layouts/Admin.js";
 import ManagerLayout from "layouts/Manager.js";
 import StaffLayout from "layouts/Staff.js";
 import UserLayout from "layouts/User.js";
+import SuperStaffLayout from "layouts/SuperStaff";
 // import AuthLayout from "layouts/Auth.js";
 
 // -------------------import Home pages---------------------//
@@ -22,6 +23,10 @@ ReactDOM.render(
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
       <Route path="/manager" render={(props) => <ManagerLayout {...props} />} />
       <Route path="/staff" render={(props) => <StaffLayout {...props} />} />
+      <Route
+        path="/superstaff"
+        render={(props) => <SuperStaffLayout {...props} />}
+      />
       <Route path="/user" render={(props) => <UserLayout {...props} />} />
       {/* <Route path="/auth" render={(props) => <AuthLayout {...props} />} /> */}
       {/* -------------Home page Main service-------------- */}

@@ -1,12 +1,12 @@
 import Index from "views/examples/Manager_view/Index";
 import Profile from "components/Manager/Profile";
-import Tables from "components/Manager/Tables";
+
 import Assignjob from "components/Manager/Assignjob";
 import Changepassword from "components/Manager/Changepassword";
 import History from "components/Manager/History";
 import Editprofile from "components/Manager/Editprofile";
-import Report from "components/Manager/Report";
-import Contacts from "components/Admin/Contacts";
+import Listitem from "components/Manager/Listitem"
+import Contacts from "components/Manager/Contacts";
 //import Button from "components/Manager/Button";
 
 var routes = [
@@ -24,21 +24,14 @@ var routes = [
     component: Profile,
     layout: "/manager",
   },
-
-  {
-    path: "/Editprofile",
-    name: "Dashboard",
-    icon: "ni ni-settings text-green",
-    component: Editprofile,
-    layout: "/manager",
-  },
   {
     path: "/Changepassword",
     name: "Changepassword",
-    icon: "ni ni-key-25 text-brown",
+    icon: "ni ni-basket ext-blue",
     component: Changepassword,
     layout: "/manager",
   },
+
   {
     path: "/Assignjob",
     name: "Assignjob",
@@ -47,19 +40,13 @@ var routes = [
     layout: "/manager",
   },
   {
-    path: "/Report",
-    name: "Report",
-    icon: "ni ni-single-copy-04 text-red",
-    component: Report,
+    path: "/Listitem",
+    name: "Listitem",
+    icon: "ni ni-world text-indigo",
+    component: Listitem,
     layout: "/manager",
   },
-  {
-    path: "/Tables",
-    name: "Tables-Work",
-    icon: "ni ni-calendar-grid-58 text-purple",
-    component: Tables,
-    layout: "/manager",
-  },
+
   {
     path: "/History",
     name: "History",
@@ -74,5 +61,6 @@ var routes = [
     component: Contacts,
     layout: "/manager",
   },
+  
 ];
 export default routes;

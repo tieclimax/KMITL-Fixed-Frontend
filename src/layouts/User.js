@@ -6,7 +6,8 @@ import { Container } from "reactstrap";
 import AdminNavbar from "components/Navbars/UserNavbar";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-
+import Editprofile from "components/User/Editprofile"
+import Changepassword from "components/User/Changepassword"
 import routes from "routes/user.routes";
 
 class User extends React.Component {
@@ -60,6 +61,8 @@ class User extends React.Component {
             brandText={this.getBrandText(this.props.location.pathname)}
           />
           <Switch>
+          <Route path="/User/Editprofile" component={Editprofile} />
+            <Route path="/User/Changepassword" component={Changepassword} />
             {this.getRoutes(routes)}
             <Redirect from="*" to="/user/index" />
           </Switch>

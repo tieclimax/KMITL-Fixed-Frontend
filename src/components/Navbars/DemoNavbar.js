@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 // JavaScript plugin that hides or shows a component based on your scroll
 import Headroom from "headroom.js";
-// import "../../assets/css/style.css";
+import "../../assets/css/style.css";
 // reactstrap components
 import {
   Button,
@@ -111,8 +111,7 @@ class DemoNavbar extends React.Component {
                               แจ้งซ่อม
                             </h6>
                             <p className="description d-none d-md-inline-block mb-0">
-                              Consequat do labore esse do eiusmod aliqua non
-                              ipsum proident velit id cillum qui culpa.
+                              แจ้งซ่อม 3 ขั้นตอนง่ายๆ
                             </p>
                           </Media>
                         </Media>
@@ -129,9 +128,12 @@ class DemoNavbar extends React.Component {
                               เริ่มต้นใช้งาน
                             </h6>
                             <p className="description d-none d-md-inline-block mb-0">
-                              Learn more about EZrepair Service. Ullamco
-                              deserunt officia cupidatat aute veniam minim
-                              ullamco.
+                              ผู้ใช้จำเป็นต้องอัพโหลด หรือถ่ายรูปภาพของอุปกรณ์
+                              ที่เสียหายหรือชำรุด
+                              เพื่อให้ทางผู้ดูแลได้เห็นว่ารูปของ
+                              อุปกรณ์ว่าคืออะไรหรือมีความเสียหายมากน้อยเท่าไร
+                              อีกทั้งระบุรายละเอียดต่างๆ
+                              เพื่อให้ผู้ดูแลได้สามารถ ไปจัดการได้ถูกที่และเวลา
                             </p>
                           </Media>
                         </Media>
@@ -143,13 +145,45 @@ class DemoNavbar extends React.Component {
                       <i className="ni ni-collection d-lg-none mr-1" />
                       <span className="nav-link-inner--text">เกี่ยวกับเรา</span>
                     </DropdownToggle>
-                    <DropdownMenu>
+                    {/* <DropdownMenu>
                       <DropdownItem to="/" tag={Link}>
                         ระบบแจ้งซ่อม
                       </DropdownItem>
                       <DropdownItem to="/" tag={Link}>
                         ข้อมูลติดต่อ
                       </DropdownItem>
+                    </DropdownMenu> */}
+                    <DropdownMenu className="dropdown-menu-xl">
+                      <div className="dropdown-menu-inner">
+                        <Media
+                          className="d-flex align-items-center"
+                          to="/"
+                          tag={Link}
+                        >
+                          <div className="icon icon-shape bg-gradient-primary rounded-circle text-white">
+                            <i className="ni ni-book-bookmark" />
+                          </div>
+                          <Media body className="ml-3">
+                            <h6 className="heading text-primary mb-md-1">
+                              ระบบแจ้งซ่อม
+                            </h6>
+                          </Media>
+                        </Media>
+                        <Media
+                          className="d-flex align-items-center"
+                          to="/"
+                          tag={Link}
+                        >
+                          <div className="icon icon-shape bg-gradient-success rounded-circle text-white">
+                            <i className="ni ni-send" />
+                          </div>
+                          <Media body className="ml-3">
+                            <h6 className="heading text-primary mb-md-1">
+                              ข้อมูลติดต่อ
+                            </h6>
+                          </Media>
+                        </Media>
+                      </div>
                     </DropdownMenu>
                   </UncontrolledDropdown>
                 </Nav>
@@ -157,7 +191,7 @@ class DemoNavbar extends React.Component {
                   <NavItem>
                     <NavLink
                       className="nav-link-icon"
-                      href="https://www.facebook.com/creativetim"
+                      href="https://www.facebook.com"
                       id="tooltip333589074"
                       target="_blank"
                     >
@@ -173,7 +207,7 @@ class DemoNavbar extends React.Component {
                   <NavItem>
                     <NavLink
                       className="nav-link-icon"
-                      href="https://www.instagram.com/creativetimofficial"
+                      href="https://www.instagram.com"
                       id="tooltip356693867"
                       target="_blank"
                     >
@@ -191,15 +225,15 @@ class DemoNavbar extends React.Component {
                     <Button
                       className="btn-neutral btn-icon"
                       color="default"
-                      to="/"
+                      to="/register-page"
                       tag={Link}
                       // target="_blank"
                     >
-                      <span className="fa fa-code">
-                        <i className="fa fa-get-pocket mr-2" />
+                      <span className="ni ni-active-40 ">
+                        <i className=" mr-2" />
                       </span>
                       <span className="nav-link-inner--text ml-1">
-                        เริ่มต้นใช้งาน
+                        สมัครสมาชิก
                       </span>
                     </Button>
                   </NavItem>

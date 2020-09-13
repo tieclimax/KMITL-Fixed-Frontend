@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 // reactstrap components
 import {
   Button,
@@ -143,7 +143,13 @@ class Login extends React.Component {
                         href="#pablo"
                         onClick={(e) => e.preventDefault()}
                       >
-                        <small>ลืมรหัสผ่าน?</small>
+                        <Link
+                          to={"/changepassword-page"}
+                          activeClassName="active"
+                          style={{ color: "white", fontSize: "1.15rem" }}
+                        >
+                          <small>ลืมรหัสผ่าน</small>
+                        </Link>
                       </a>
                     </Col>
                     <Col className="text-right" xs="6">
@@ -152,7 +158,13 @@ class Login extends React.Component {
                         href="#pablo"
                         onClick={(e) => e.preventDefault()}
                       >
-                        <small>สร้างบัญชีใหม่</small>
+                        <Link
+                          to={"/register-page"}
+                          activeClassName="active"
+                          style={{ color: "white", fontSize: "1.15rem" }}
+                        >
+                          <small>สร้างบัญชีใหม่</small>
+                        </Link>
                       </a>
                     </Col>
                   </Row>

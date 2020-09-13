@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 // reactstrap components
 import {
   Button,
@@ -15,6 +15,7 @@ import {
   Container,
   Row,
   Col,
+  Media,
 } from "reactstrap";
 
 // core components
@@ -48,7 +49,10 @@ class Register extends React.Component {
                 <Col lg="5">
                   <Card className="bg-secondary shadow border-0">
                     <CardHeader className="bg-white pb-5">
-                      <div className="text-muted text-center mb-3">
+                      <div
+                        className="text-muted text-center mb-3"
+                        style={{ fontSize: "1.4rem" }}
+                      >
                         <small>ลงทะเบียน</small>
                       </div>
                       <div className="text-center">
@@ -82,8 +86,11 @@ class Register extends React.Component {
                         </Button>
                       </div>
                     </CardHeader>
-                    <CardBody className="px-lg-5 py-lg-5">
-                      <div className="text-center text-muted mb-4">
+                    <CardBody className="px-lg-5 py-lg-2">
+                      <div
+                        className="text-center text-muted mb-4"
+                        style={{ fontSize: "1.25rem" }}
+                      >
                         <small>หรือลงทะเบียนเข้าใช้ด้วยข้อมูลรับรอง</small>
                       </div>
                       <Form role="form">
@@ -188,6 +195,16 @@ class Register extends React.Component {
                           </Button>
                         </div>
                       </Form>
+                      <Row className="justify-content-center mt-4">
+                        <div className="to-login">
+                          <p>
+                            หากมีบัญชีอยู่แล้ว{" "}
+                            <Link to={"/login-page"} activeClassName="active">
+                              เข้าสู่ระบบ
+                            </Link>
+                          </p>
+                        </div>
+                      </Row>
                     </CardBody>
                   </Card>
                 </Col>

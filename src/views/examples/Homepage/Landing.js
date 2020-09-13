@@ -75,7 +75,7 @@ class Landing extends React.Component {
                         <Button
                           className="btn-icon mb-3 mb-sm-0"
                           color="info"
-                          to="/service"
+                          to="/service-page"
                           tag={Link}
                         >
                           <span className="btn-inner--icon mr-1">

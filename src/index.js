@@ -18,6 +18,7 @@ import SuperStaffLayout from "layouts/SuperStaff";
 import Landing from "views/examples/Homepage/Landing.js";
 import Login from "views/examples/Homepage/Login.js";
 import Register from "views/examples/Homepage/Register.js";
+import Service from "views/examples/Homepage/Service.js";
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
@@ -46,6 +47,11 @@ ReactDOM.render(
         path="/register-page"
         exact
         render={(props) => <Register {...props} />}
+      />
+      <Route
+        path="/service-page"
+        exact
+        render={(props) => <Service {...props} />}
       />
       <Redirect from="*" to="/" />
     </Switch>

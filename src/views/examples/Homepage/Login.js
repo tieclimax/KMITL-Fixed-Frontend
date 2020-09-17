@@ -1,5 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Formvalidation from "react-validation/build/form";
+import Inputvalidation from "react-validation/build/input";
+import CheckButton from "react-validation/build/button";
+
+import AuthService from "../../../services/auth.service";
 // reactstrap components
 import {
   Button,
@@ -21,7 +26,80 @@ import {
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
 import CardsFooter from "components/Footers/CardsFooter.js";
 
+const required = (value) => {
+  if (!value) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        กรุณากรอกข้อมูลให้ครบ
+      </div>
+    );
+  }
+};
+
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+
+    this.state = {
+      username: "",
+      password: "",
+      loading: false,
+      message: "",
+    };
+  }
+
+  onChangeUsername(e) {
+    this.setState({
+      username: e.target.value,
+    });
+  }
+
+  onChangePassword(e) {
+    this.setState({
+      password: e.target.value,
+    });
+  }
+
+  handleLogin(e) {
+    e.preventDefault();
+    console.log("The link was clicked.");
+    this.setState({
+      message: "",
+      loading: true,
+    });
+
+    // this.form.validateAll();
+
+    if (this.state.username && this.state.password) {
+      AuthService.login(this.state.username, this.state.password).then(
+        () => {
+          this.props.history.push("/Landing-page");
+          window.location.reload();
+        },
+        (error) => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+          this.setState({
+            loading: false,
+            message: resMessage,
+          });
+        }
+      );
+    } else {
+      this.setState({
+        loading: false,
+      });
+    }
+  }
+
   componentDidMount() {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
@@ -52,20 +130,6 @@ class Login extends React.Component {
                         <small>เข้าสู่ระบบด้วย</small>
                       </div>
                       <div className="btn-wrapper text-center">
-                        {/* <Button
-                          className="btn-neutral btn-icon"
-                          color="default"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <span className="btn-inner--icon mr-1">
-                            <img
-                              alt="..."
-                              src={require("assets/img/icons/common/github.svg")}
-                            />
-                          </span>
-                          <span className="btn-inner--text">Github</span>
-                        </Button> */}
                         <Button
                           className="btn-neutral btn-icon ml-1"
                           color="default"
@@ -86,7 +150,7 @@ class Login extends React.Component {
                       <div className="text-center text-muted mb-4">
                         <small>หรือลงชื่อเข้าใช้ด้วยข้อมูลรับรอง</small>
                       </div>
-                      <Form role="form">
+                      <Form onSubmit={this.handleLogin}>
                         <FormGroup className="mb-3">
                           <InputGroup className="input-group-alternative">
                             <InputGroupAddon addonType="prepend">
@@ -94,7 +158,14 @@ class Login extends React.Component {
                                 <i className="ni ni-email-83" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="อีเมล" type="email" />
+                            <Input
+                              placeholder="Username"
+                              type="text"
+                              name="username"
+                              value={this.state.username}
+                              onChange={this.onChangeUsername}
+                              required
+                            />
                           </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -105,9 +176,13 @@ class Login extends React.Component {
                               </InputGroupText>
                             </InputGroupAddon>
                             <Input
-                              placeholder="รหัสผ่าน"
+                              placeholder="Password"
                               type="password"
                               autoComplete="off"
+                              name="password"
+                              value={this.state.password}
+                              onChange={this.onChangePassword}
+                              required
                             />
                           </InputGroup>
                         </FormGroup>
@@ -124,14 +199,20 @@ class Login extends React.Component {
                             <span>จดจำฉัน</span>
                           </label>
                         </div>
-                        <div className="text-center">
-                          <Button
-                            className="my-4"
-                            color="primary"
-                            type="button"
-                          >
-                            เข้าสู่ระบบ
-                          </Button>
+                        <div className="form-group">
+                          <div className="text-center">
+                            <Button
+                              className="my-4"
+                              color="primary"
+                              type="submit"
+                              // disabled={this.state.loading}
+                            >
+                              {this.state.loading && (
+                                <span className="spinner-border spinner-border-sm"></span>
+                              )}
+                              เข้าสู่ระบบ
+                            </Button>
+                          </div>
                         </div>
                       </Form>
                     </CardBody>

@@ -58,19 +58,7 @@ class Profile extends React.Component {
                         </div>
                       </Col>
                     </Row>
-                    <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                      {/*<div className="justify-content-right">
-                        <Button
-                          className="mr-4"
-                          color="danger"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                          size="sm"
-                        >
-                          Edit
-                        </Button>
-    </div>*/}
-                    </CardHeader>
+                    <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"></CardHeader>
                     {/** */}
                     <Row className="align-items-center">
                       <Col xs="8">

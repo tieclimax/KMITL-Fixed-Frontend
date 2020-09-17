@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { isEmail } from "validator";
+import AuthService from "../../../services/auth.service";
 // reactstrap components
 import {
   Button,
@@ -15,19 +17,137 @@ import {
   Container,
   Row,
   Col,
-  Media,
 } from "reactstrap";
 
 // core components
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
 import CardsFooter from "components/Footers/CardsFooter.js";
 
+const email = (value) => {
+  if (!isEmail(value)) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        This is not a valid email.
+      </div>
+    );
+  }
+};
+
+const vusername = (value) => {
+  if (value.length < 3 || value.length > 20) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        The username must be between 3 and 20 characters.
+      </div>
+    );
+  }
+};
+
+const vpassword = (value) => {
+  if (value.length < 6 || value.length > 40) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        The password must be between 6 and 40 characters.
+      </div>
+    );
+  }
+};
 class Register extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleRegister = this.handleRegister.bind(this);
+    this.onChangeFirstname = this.onChangeFirstname.bind(this);
+    this.onChangeLastname = this.onChangeLastname.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+
+    this.state = {
+      firstname: "",
+      lastname: "",
+      email: "",
+      username: "",
+      password: "",
+      successful: false,
+      message: "",
+    };
+  }
+  onChangeFirstname(e) {
+    this.setState({
+      firstname: e.target.value,
+    });
+  }
+  onChangeLastname(e) {
+    this.setState({
+      lastname: e.target.value,
+    });
+  }
+
+  onChangeUsername(e) {
+    this.setState({
+      username: e.target.value,
+    });
+  }
+
+  onChangeEmail(e) {
+    this.setState({
+      email: e.target.value,
+    });
+  }
+
+  onChangePassword(e) {
+    this.setState({
+      password: e.target.value,
+    });
+  }
+
+  handleRegister(e) {
+    e.preventDefault();
+
+    this.setState({
+      message: "",
+      successful: false,
+    });
+    if (this.state.username && this.state.password) {
+      AuthService.register(
+        this.state.firstname,
+        this.state.lastname,
+        this.state.email,
+        this.state.username,
+        this.state.password
+      ).then(
+        (response) => {
+          this.setState({
+            message: response.data.message,
+            successful: true,
+          });
+          this.props.history.push("/Login-page");
+          window.location.reload();
+        },
+        (error) => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+          this.setState({
+            successful: false,
+            message: resMessage,
+          });
+        }
+      );
+    }
+  }
+
   componentDidMount() {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
   }
+
   render() {
     return (
       <>
@@ -56,20 +176,6 @@ class Register extends React.Component {
                         <small>ลงทะเบียน</small>
                       </div>
                       <div className="text-center">
-                        {/* <Button
-                          className="btn-neutral btn-icon mr-4"
-                          color="default"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <span className="btn-inner--icon mr-1">
-                            <img
-                              alt="..."
-                              src={require("assets/img/icons/common/github.svg")}
-                            />
-                          </span>
-                          <span className="btn-inner--text">Github</span>
-                        </Button> */}
                         <Button
                           className="btn-neutral btn-icon ml-1"
                           color="default"
@@ -93,7 +199,7 @@ class Register extends React.Component {
                       >
                         <small>หรือลงทะเบียนเข้าใช้ด้วยข้อมูลรับรอง</small>
                       </div>
-                      <Form role="form">
+                      <Form role="form" onSubmit={this.handleRegister}>
                         <FormGroup>
                           <InputGroup className="input-group-alternative mb-3">
                             <InputGroupAddon addonType="prepend">
@@ -101,7 +207,14 @@ class Register extends React.Component {
                                 <i className="ni ni-hat-3" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="ชื่อ" type="text" />
+                            <Input
+                              placeholder="ชื่อ"
+                              type="text"
+                              name="name"
+                              value={this.state.firstname}
+                              onChange={this.onChangeFirstname}
+                              required
+                            />
                           </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -111,7 +224,14 @@ class Register extends React.Component {
                                 <i className="ni ni-hat-3" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="นามสกุล" type="text" />
+                            <Input
+                              placeholder="นามสกุล"
+                              type="text"
+                              name="lastname"
+                              value={this.state.lastname}
+                              onChange={this.onChangeLastname}
+                              required
+                            />
                           </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -121,7 +241,31 @@ class Register extends React.Component {
                                 <i className="ni ni-email-83" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="อีเมล" type="email" />
+                            <Input
+                              placeholder="อีเมล"
+                              type="email"
+                              name="email"
+                              value={this.state.email}
+                              onChange={this.onChangeEmail}
+                              validations={[email]}
+                            />
+                          </InputGroup>
+                        </FormGroup>
+                        <FormGroup>
+                          <InputGroup className="input-group-alternative mb-3">
+                            <InputGroupAddon addonType="prepend">
+                              <InputGroupText>
+                                <i className="ni ni-circle-08" />
+                              </InputGroupText>
+                            </InputGroupAddon>
+                            <Input
+                              placeholder="ชื่อผู้ใช้"
+                              type="text"
+                              name="username"
+                              value={this.state.username}
+                              onChange={this.onChangeUsername}
+                              validations={[vusername]}
+                            />
                           </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -135,31 +279,14 @@ class Register extends React.Component {
                               placeholder="รหัสผ่าน"
                               type="password"
                               autoComplete="off"
+                              name="username"
+                              value={this.state.password}
+                              onChange={this.onChangePassword}
+                              validations={[vpassword]}
                             />
                           </InputGroup>
                         </FormGroup>
-                        <FormGroup>
-                          <InputGroup className="input-group-alternative">
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>
-                                <i className="ni ni-lock-circle-open" />
-                              </InputGroupText>
-                            </InputGroupAddon>
-                            <Input
-                              placeholder="ยืนยันรหัสผ่าน"
-                              type="password"
-                              autoComplete="off"
-                            />
-                          </InputGroup>
-                        </FormGroup>
-                        {/* <div className="text-muted font-italic">
-                          <small>
-                            password strength:{" "}
-                            <span className="text-success font-weight-700">
-                              strong
-                            </span>
-                          </small>
-                        </div> */}
+
                         <Row className="my-4">
                           <Col xs="12">
                             <div className="custom-control custom-control-alternative custom-checkbox">
@@ -167,6 +294,7 @@ class Register extends React.Component {
                                 className="custom-control-input"
                                 id="customCheckRegister"
                                 type="checkbox"
+                                required
                               />
                               <label
                                 className="custom-control-label"
@@ -189,7 +317,7 @@ class Register extends React.Component {
                           <Button
                             className="mt-4"
                             color="primary"
-                            type="button"
+                            type="submit"
                           >
                             สร้างบัญชี
                           </Button>

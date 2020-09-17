@@ -153,27 +153,19 @@ class Sidebar extends React.Component {
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-arrow" right>
                 <DropdownItem className="noti-title" header tag="div">
-                  <h6 className="text-overflow m-0">Welcome!</h6>
+                  <h6 className="text-overflow m-0">ยินดีต้อนรับ</h6>
                 </DropdownItem>
-                <DropdownItem to="/manager/manager-Profile" tag={Link}>
+                <DropdownItem to="/admin/profile" tag={Link}>
                   <i className="ni ni-single-02" />
-                  <span>My profile</span>
+                  <span>โปรไฟล์ของฉัน</span>
                 </DropdownItem>
-                <DropdownItem to="/manager/manager-Editprofile" tag={Link}>
-                  <i className="ni ni-support-16" />
-                  <span>Editprofile</span>
-                </DropdownItem>
-                <DropdownItem to="/manager/manager-Chandpassword2" tag={Link}>
+                <DropdownItem to="/admin/Editprofile" tag={Link}>
                   <i className="ni ni-settings-gear-65" />
-                  <span>Changpassword</span>
+                  <span>แก้ไขประวัติส่วนตัว</span>
                 </DropdownItem>
-                <DropdownItem to="/admin/user-profile" tag={Link}>
-                  <i className="ni ni-calendar-grid-58" />
-                  <span>Activity</span>
-                </DropdownItem>
-                <DropdownItem to="/admin/user-profile" tag={Link}>
-                  <i className="ni ni-support-16" />
-                  <span>Support</span>
+                <DropdownItem to="/admin/Changpassword" tag={Link}>
+                  <i className="ni ni-settings-gear-65" />
+                  <span>เปลี่ยนรหัสผ่าน</span>
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>

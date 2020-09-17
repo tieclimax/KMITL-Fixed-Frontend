@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 // JavaScript plugin that hides or shows a component based on your scroll
 import Headroom from "headroom.js";
 import "../../assets/css/style.css";
-// reactstrap components
+
+import AuthService from "services/auth.service";
 import {
   Button,
   UncontrolledCollapse,
@@ -20,15 +21,34 @@ import {
   Container,
   Row,
   Col,
-  UncontrolledTooltip,
 } from "reactstrap";
 
 class DemoNavbar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.logOut = this.logOut.bind(this);
+
+    this.state = {
+      currentUser: undefined,
+    };
+  }
+
   componentDidMount() {
+    const user = AuthService.getCurrentUser();
+    if (user) {
+      this.setState({
+        currentUser: user,
+      });
+    }
     let headroom = new Headroom(document.getElementById("navbar-main"));
     // initialize
     headroom.init();
   }
+
+  logOut() {
+    AuthService.logout();
+  }
+
   state = {
     collapseClasses: "",
     collapseOpen: false,
@@ -47,6 +67,7 @@ class DemoNavbar extends React.Component {
   };
 
   render() {
+    const { currentUser } = this.state;
     return (
       <>
         <header className="header-global">
@@ -145,14 +166,7 @@ class DemoNavbar extends React.Component {
                       <i className="ni ni-collection d-lg-none mr-1" />
                       <span className="nav-link-inner--text">เกี่ยวกับเรา</span>
                     </DropdownToggle>
-                    {/* <DropdownMenu>
-                      <DropdownItem to="/" tag={Link}>
-                        ระบบแจ้งซ่อม
-                      </DropdownItem>
-                      <DropdownItem to="/" tag={Link}>
-                        ข้อมูลติดต่อ
-                      </DropdownItem>
-                    </DropdownMenu> */}
+
                     <DropdownMenu className="dropdown-menu-xl">
                       <div className="dropdown-menu-inner">
                         <Media
@@ -195,14 +209,11 @@ class DemoNavbar extends React.Component {
                       id="tooltip333589074"
                       target="_blank"
                     >
-                      <i className="fa fa-facebook-square" />
+                      <i className="ni ni-square-pin d-lg-none mr-1" />
                       <span className="nav-link-inner--text d-lg-none ml-2">
                         Facebook
                       </span>
                     </NavLink>
-                    <UncontrolledTooltip delay={0} target="tooltip333589074">
-                      Like us on Facebook
-                    </UncontrolledTooltip>
                   </NavItem>
                   <NavItem>
                     <NavLink
@@ -211,31 +222,73 @@ class DemoNavbar extends React.Component {
                       id="tooltip356693867"
                       target="_blank"
                     >
-                      <i className="fa fa-instagram" />
+                      <i className="ni ni-tag d-lg-none mr-1" />
                       <span className="nav-link-inner--text d-lg-none ml-2">
                         Kmitl
                       </span>
                     </NavLink>
-                    <UncontrolledTooltip delay={0} target="tooltip356693867">
-                      Follow us on Kmitl
-                    </UncontrolledTooltip>
                   </NavItem>
+                  {currentUser ? (
+                    <UncontrolledDropdown nav>
+                      <DropdownToggle nav>
+                        <i className="ni ni-collection d-lg-none mr-1" />
+                        <span className="nav-link-inner--text">
+                          {currentUser.username}
+                        </span>
+                      </DropdownToggle>
 
-                  <NavItem className="d-none d-lg-block ml-lg-4">
-                    <Button
-                      className="btn-neutral btn-icon"
-                      color="default"
-                      to="/register-page"
+                      <DropdownMenu className="dropdown-menu-md">
+                        <div className="dropdown-menu-inner">
+                          <Media
+                            className="d-flex align-items-center"
+                            to="/Login-page"
+                            tag={Link}
+                            onClick={this.logOut}
+                          >
+                            <div className="icon icon-shape bg-gradient-primary rounded-circle text-white">
+                              <i className="ni ni-bold-left" />
+                            </div>
+                            <Media
+                              body
+                              className="ml-3"
+                              style={{ width: "30px" }}
+                            >
+                              <h6 className="heading text-primary mb-md-1">
+                                ออกจากระบบ
+                              </h6>
+                            </Media>
+                          </Media>
+                        </div>
+                      </DropdownMenu>
+                    </UncontrolledDropdown>
+                  ) : (
+                    <NavItem className="d-none d-lg-block ml-lg-4">
+                      <Button
+                        className="btn-neutral btn-icon"
+                        color="default"
+                        to="/Login-page"
+                        tag={Link}
+                      >
+                        <span className="ni ni-active-40 ">
+                          <i className=" mr-2" />
+                        </span>
+                        <span className="nav-link-inner--text ml-1">
+                          เข้าสู่ระบบ
+                        </span>
+                      </Button>
+                    </NavItem>
+                  )}
+                  <NavItem>
+                    <NavLink
+                      className="nav-link-icon"
+                      to="/Login-page"
                       tag={Link}
-                      // target="_blank"
                     >
-                      <span className="ni ni-active-40 ">
-                        <i className=" mr-2" />
+                      <i className="ni ni-active-40 d-lg-none mr-1" />
+                      <span className="nav-link-inner--text d-lg-none ml-2">
+                        เข้าสู่ระบบ
                       </span>
-                      <span className="nav-link-inner--text ml-1">
-                        สมัครสมาชิก
-                      </span>
-                    </Button>
+                    </NavLink>
                   </NavItem>
                 </Nav>
               </UncontrolledCollapse>

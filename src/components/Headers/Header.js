@@ -1,5 +1,7 @@
 import React from "react";
 import "../../assets/css/style.css";
+import axios from "axios";
+// import DashboardRetrive from "../../services/dashboard.service";
 // reactstrap components
 import {
   Card,
@@ -12,7 +14,25 @@ import {
 } from "reactstrap";
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      getall_work: [],
+    };
+  }
+
+  componentDidMount() {
+    // const getall_work = DashboardRetrive.getDataDashboard();
+    // this.setState({ getall_work });
+
+    axios.get(`http://localhost:8080/api/CountDashboard/`).then((res) => {
+      const getall_work = res.data;
+      this.setState({ getall_work });
+    });
+  }
+
   render() {
+    const { getall_work } = this.state;
     return (
       <>
         <div className="header-top bg-gradient-warning pb-8 pt-5 pt-md-8">
@@ -32,7 +52,11 @@ class Header extends React.Component {
                           >
                             งานทั้งหมด
                           </CardTitle>
-                          <span className="h2 font-weight-bold mb-0">22</span>
+                          <span className="h2 font-weight-bold mb-0">
+                            {getall_work.map(
+                              (getall_work) => getall_work.all_work
+                            )}
+                          </span>
                         </div>
                         <Col className="col-auto">
                           <div className="icon icon-shape bg-info text-white rounded-circle shadow">
@@ -40,13 +64,8 @@ class Header extends React.Component {
                           </div>
                         </Col>
                       </Row>
-                      <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-info mr-2">
-                          <i className="fa fa-arrow-up" /> 21.01%
-                        </span>{" "}
-                        <span className="text-nowrap">all work</span>
-                      </p>
-                      <Progress color="info" value="22" />
+                      <p className="mt-4 mb-0 text-muted text-sm"></p>
+                      <Progress color="info" value="" />
                     </CardBody>
                   </Card>
                 </Col>
@@ -61,7 +80,11 @@ class Header extends React.Component {
                           >
                             งานเข้าใหม่
                           </CardTitle>
-                          <span className="h2 font-weight-bold mb-0">11</span>
+                          <span className="h2 font-weight-bold mb-0">
+                            {getall_work.map(
+                              (getall_work) => getall_work.new_work
+                            )}
+                          </span>
                         </div>
                         <Col className="col-auto">
                           <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -69,13 +92,8 @@ class Header extends React.Component {
                           </div>
                         </Col>
                       </Row>
-                      <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-warning mr-2">
-                          <i className="fa fa-arrow-up" /> 11.48%
-                        </span>{" "}
-                        <span className="text-nowrap">all new work</span>
-                      </p>
-                      <Progress color="warning" value="11" />
+                      <p className="mt-4 mb-0 text-muted text-sm"></p>
+                      <Progress color="info" value="" />
                     </CardBody>
                   </Card>
                 </Col>
@@ -90,7 +108,11 @@ class Header extends React.Component {
                           >
                             งานเสร็จเเล้ว
                           </CardTitle>
-                          <span className="h2 font-weight-bold mb-0">32</span>
+                          <span className="h2 font-weight-bold mb-0">
+                            {getall_work.map(
+                              (getall_work) => getall_work.complete_work
+                            )}
+                          </span>
                         </div>
                         <Col className="col-auto">
                           <div className="icon icon-shape bg-green text-white rounded-circle shadow">
@@ -98,13 +120,8 @@ class Header extends React.Component {
                           </div>
                         </Col>
                       </Row>
-                      <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-success mr-2">
-                          <i className="fa fa-arrow-up" /> 32.01%
-                        </span>{" "}
-                        <span className="text-nowrap">completed work</span>
-                      </p>
-                      <Progress color="success" value="32" />
+                      <p className="mt-4 mb-0 text-muted text-sm"></p>
+                      <Progress color="info" value="" />
                     </CardBody>
                   </Card>
                 </Col>
@@ -119,7 +136,11 @@ class Header extends React.Component {
                           >
                             งานยังไม่เสร็จ
                           </CardTitle>
-                          <span className="h2 font-weight-bold mb-0">5</span>
+                          <span className="h2 font-weight-bold mb-0">
+                            {getall_work.map(
+                              (getall_work) => getall_work.uncomplete_work
+                            )}
+                          </span>
                         </div>
                         <Col className="col-auto">
                           <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -127,13 +148,8 @@ class Header extends React.Component {
                           </div>
                         </Col>
                       </Row>
-                      <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-danger mr-2">
-                          <i className="fa fa-arrow-up" /> 5.01%
-                        </span>{" "}
-                        <span className="text-nowrap">completed work</span>
-                      </p>
-                      <Progress color="danger" value="5" />
+                      <p className="mt-4 mb-0 text-muted text-sm"></p>
+                      <Progress color="info" value="" />
                     </CardBody>
                   </Card>
                 </Col>

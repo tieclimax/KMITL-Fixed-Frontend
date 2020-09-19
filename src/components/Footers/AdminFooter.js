@@ -7,7 +7,7 @@ import { Container, Row, Col, Nav, NavItem, NavLink } from "reactstrap";
 class Footer extends React.Component {
   render() {
     return (
-      <footer className="footer">
+      <footer className="footer ">
         <Row className="align-items-center justify-content-xl-between">
           <Col xl="6">
             <div className="copyright text-center text-xl-center text-muted">
@@ -18,7 +18,7 @@ class Footer extends React.Component {
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                EasyRepair
+                KMITL-Fixed
               </a>
             </div>
           </Col>
@@ -27,7 +27,7 @@ class Footer extends React.Component {
             <Nav className="nav-footer justify-content-center">
               <NavItem>
                 <NavLink href="" target="_blank">
-                  EZrepair
+                  KMITL-Fixed
                 </NavLink>
               </NavItem>
               <NavItem>

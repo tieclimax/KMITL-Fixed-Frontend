@@ -5,6 +5,7 @@ import classnames from "classnames";
 import Chart from "chart.js";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
+
 // reactstrap components
 import {
   Button,
@@ -29,6 +30,8 @@ import {
   chartExample2,
 } from "variables/charts.js";
 
+import axios from "axios";
+
 import Header from "components/Headers/Header.js";
 
 class Index extends React.Component {
@@ -37,6 +40,7 @@ class Index extends React.Component {
     this.state = {
       activeNav: 1,
       chartExample1Data: "data1",
+      getWork: [],
     };
     if (window.Chart) {
       parseOptions(Chart, chartOptions());
@@ -50,7 +54,16 @@ class Index extends React.Component {
         this.state.chartExample1Data === "data1" ? "data2" : "data1",
     });
   };
+
+  componentDidMount() {
+    axios.get(`http://localhost:8080/api/findJobBystatusID/1`).then((res) => {
+      const getWork = res.data;
+      this.setState({ getWork });
+    });
+  }
+
   render() {
+    const { getWork } = this.state;
     return (
       <>
         <Header />
@@ -63,9 +76,8 @@ class Index extends React.Component {
                   <Row className="align-items-center">
                     <div className="col">
                       <h6 className="text-uppercase text-body ls-1 mb-1">
-                        ภาพรวม
+                        ภาพรวมทั้งหมด
                       </h6>
-                      <h2 className="text-body mb-0">ภาพรวมทั้งหมด</h2>
                     </div>
                     <div className="col">
                       <Nav className="justify-content-end" pills>
@@ -116,9 +128,8 @@ class Index extends React.Component {
                   <Row className="align-items-center">
                     <div className="col">
                       <h6 className="text-uppercase text-body ls-1 mb-1">
-                        Performance
+                        ค่าเฉลี่ยของงาน
                       </h6>
-                      <h2 className="mb-0">Total Request Job</h2>
                     </div>
                   </Row>
                 </CardHeader>
@@ -154,58 +165,29 @@ class Index extends React.Component {
                     </div>
                   </Row>
                 </CardHeader>
-                <Table className="align-items-center table-flush" responsive>
+                <Table className="align-items-center table-flush " responsive>
                   <thead className="thead-light">
                     <tr>
-                      <th scope="col">ชื่อผู้รับผิดชอบ</th>
-                      <th scope="col">ชื่องาน</th>
-                      <th scope="col">สถานที่</th>
-                      <th scope="col">ชั้น - ห้อง</th>
                       <th scope="col">#</th>
+                      <th scope="col">ชื่อผู้ส่ง</th>
+                      <th scope="col">ตึก</th>
+                      <th scope="col">ชั้น - ห้อง</th>
+                      <th scope="col">เวลาที่ส่งมา</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">นายสันขวาน</th>
-                      <td>เปลี่ยนใบพัดลม</td>
-                      <td>อาคารพระจอมเกล้า</td>
-                      <td>2 - 214</td>
-                      <td>
-                        <i className="fas fa-arrow-up text-success mr-3" />{" "}
-                        46,53%
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">นายเจิด</th>
-                      <td>ซ่อมห้องน้ำ</td>
-                      <td>อาคารพระจอมเกล้า</td>
-                      <td>4 - 406</td>
-                      <td>
-                        <i className="fas fa-arrow-down text-warning mr-3" />{" "}
-                        46,53%
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">นางนาง</th>
-                      <td>เปลี่ยนก็อกน้ำ</td>
-                      <td>อาคารพระจอมเกล้า</td>
-                      <td>1 - //</td>
-                      <td>
-                        <i className="fas fa-arrow-down text-warning mr-3" />{" "}
-                        36,49%
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">นางสาวนาง</th>
-                      <td>เปลี่ยนท่อน้ำ </td>
-                      <td>อาคารจุฬาภรวลัยลักษณ์ 1</td>
-                      <td>3 - //</td>
-                      <td>
-                        <i className="fas fa-arrow-up text-success mr-3" />{" "}
-                        50,87%
-                      </td>
-                    </tr>
-                  </tbody>
+                  {getWork.map((getWork) => (
+                    <tbody>
+                      <tr>
+                        <th scope="row">{getWork.id}</th>
+                        <td>{getWork.User_ID}</td>
+                        <td>{getWork.Building}</td>
+                        <td>
+                          {getWork.Floor} - {getWork.Room}
+                        </td>
+                        <td>{getWork.createdAt}</td>
+                      </tr>
+                    </tbody>
+                  ))}
                 </Table>
               </Card>
             </Col>

@@ -40,3 +40,7 @@ body {
 .navbar-nav .nav-link {
   font-size: 1.15rem;
 }
+
+.table .thead-light th {
+  font-size: 1.15rem;
+}

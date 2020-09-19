@@ -24,12 +24,12 @@ class ManagerNavbar extends React.Component {
       <>
         <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
           <Container fluid>
-            <Link
+            <FormGroup
               className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
-              to="/"
+              to="/Mamager/index"
             >
               {this.props.brandText}
-            </Link>
+            </FormGroup>
             <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
               <FormGroup className="mb-0">
                 <InputGroup className="input-group-alternative">
@@ -83,7 +83,7 @@ class ManagerNavbar extends React.Component {
                     <i className="ni ni-calendar-grid-58" />
                     <span>Report</span>
                   </DropdownItem>
-               
+
                   <DropdownItem to="/manager/History" tag={Link}>
                     <i className="ni ni-calendar-grid-58" />
                     <span>History</span>
